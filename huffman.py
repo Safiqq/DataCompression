@@ -1,5 +1,5 @@
 # Huffman Coding
-from tabulate import tabulate
+from tabulate_cell_merger.tabulate_cell_merger import tabulate
 import ast
 
 
@@ -56,7 +56,7 @@ class Huffman:
 
             for char in self.input:
                 self.output += codes[char]
-            print(tabulate(self.table))
+            tabulate(self.table)
             print("Hasil encoding:", self.output)
             print("Jumlah bit awal:", len(self.input) * 8)
             print("Jumlah bit akhir:", len(self.output))
@@ -75,7 +75,7 @@ class Huffman:
             try:
                 with open('huffman.txt', 'r') as file:
                     self.table = ast.literal_eval(file.read())
-                print(tabulate(self.table))
+                tabulate(self.table)
                 curr_code = ""
                 codes = dict([(row[2], row[0]) for row in self.table[1:]])
                 for i in self.input:
