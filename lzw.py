@@ -35,7 +35,7 @@ class Huffman:
             "Y",
             "Z",
         ]
-
+        self.table = []
         self.output = ""
 
     def encode(self):
@@ -44,10 +44,8 @@ class Huffman:
         print()
 
         if len(self.input) > 0:
-            self.table = [
-                ["P", "C", "Output", "Add to dictionary"],
-                ["", "", "Index", "Index", "String"],
-            ]
+            self.table.append(["P", "C", "Output", "Add to dictionary"])
+            self.table.append(["", "", "Index", "Index", "String"])
             tabulate(self.table, {(0, 3): 2}, {(0, 0): 2, (0, 1): 2})
         else:
             print("String tidak boleh kosong!")
@@ -59,10 +57,8 @@ class Huffman:
 
         if len(self.input) > 0:
             try:
-                self.table = [
-                    ["PW string", "CW", "", "P", "C", "Output", "Add to dictionary"],
-                    ["", "Index", "String", "", "", "", "Index", "String"],
-                ]
+                self.table.append(["PW string", "CW", "", "P", "C", "Output", "Add to dictionary"])
+                self.table.append(["", "Index", "String", "", "", "", "Index", "String"])
                 tabulate(self.table, {(0, 1): 2, (0, 6): 2}, {(0, 0): 2, (0, 3): 2, (0, 4): 2, (0, 5): 2})
             except:
                 print("String tidak valid")
