@@ -36,19 +36,14 @@ class RLE:
 
         if len(self.input) > 0:
             if len(self.input) % 2 == 0:
-                i = 0
-                err = False
-                while i < len(self.input):
-                    try:
-                        _ = int(self.input[i])
-                    except:
-                        err = True
-                        print("String tidak valid!")
-                    i += 2
-                if not err:
+                try:
                     for i in range(0, len(self.input), 2):
                         self.output += self.input[i + 1] * int(self.input[i])
-                    print(self.output)
+                    print("Hasil decoding:", self.output)
+                    print("Jumlah byte awal:", len(self.input))
+                    print("Jumlah byte akhir:", len(self.output))
+                except:
+                    print("String tidak valid!")
             else:
                 print("String tidak valid!")
         else:
