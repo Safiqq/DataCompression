@@ -86,8 +86,11 @@ class LZW:
             print("String tidak boleh kosong!")
 
     def decode(self):
-        self.input = input("Masukkan string yang ingin di-decode: ")
-        print()
+        try:
+            self.input = input("Masukkan string yang ingin di-decode: ").split(" ")
+            print()
+        except:
+            print("String tidak valid!")
 
         if len(self.input) > 0:
             try:

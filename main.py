@@ -10,11 +10,11 @@ try:
             if option == 1: RLE().encode()
             elif option == 2: RLE().decode()
             else: print("!!!")
-        if code == 2:
+        elif code == 2:
             if option == 1: Huffman().encode()
             elif option == 2: Huffman().decode()
             else: print("!!!")
-        if code == 3:
+        elif code == 3:
             if option == 1: LZW().encode()
             elif option == 2: LZW().decode()
             else: print("!!!")
