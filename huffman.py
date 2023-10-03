@@ -73,7 +73,7 @@ class Huffman:
 
         if len(self.input) > 0:
             try:
-                with open('huffman.txt', 'r') as file:
+                with open("huffman.txt", "r") as file:
                     self.table = ast.literal_eval(file.read())
                 tabulate(self.table)
                 curr_code = ""
