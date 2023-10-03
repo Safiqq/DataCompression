@@ -40,62 +40,90 @@ class Huffman:
 
     def encode(self):
         # self.input = input("Masukkan string yang ingin di-encode: ")
-        self.input = "LOSSLESSLOSSLESS"
+        self.input = "ITETEBEBE"
         print()
 
         if len(self.input) > 0:
             self.table.append(["P", "C", "Output", "Add to dictionary"])
             self.table.append(["", "", "Index", "Index", "String"])
 
-            P = self.input[0]
+            _P = self.input[0]
             for i in range(len(self.input)):
-                _P = P
+                P = _P
                 C = "EOF" if len(self.input) == i + 1 else self.input[i + 1]
-                checker = False
-                if P + C in self.dict:
-                    P += C
-                    checker = True
+                isInDict = False
+                if _P + C in self.dict:
+                    _P += C
+                    isInDict = True
                 else:
-                    self.output += str(self.dict.index(P)) + " "
+                    self.output += str(self.dict.index(_P)) + " "
                     if C != "EOF":
-                        self.dict.append(P + C)
-                        P = C
+                        self.dict.append(_P + C)
+                        _P = C
+                OI = "" if isInDict else self.dict.index(P)
+                ADI = "" if isInDict or C == "EOF" else len(self.dict) - 1
+                ADS = "" if isInDict or C == "EOF" else self.dict[len(self.dict) - 1]
                 self.table.append(
                     [
-                        _P,
+                        P,
                         C,
-                        "" if checker else self.dict.index(_P),
-                        "" if checker or C == "EOF" else len(self.dict) - 1,
-                        "" if checker or C == "EOF" else self.dict[len(self.dict) - 1],
+                        OI,
+                        ADI,
+                        ADS,
                     ]
                 )
             tabulate(self.table, {(0, 3): 2}, {(0, 0): 2, (0, 1): 2})
             print("Hasil decoding:", self.output)
             print("Jumlah byte awal:", len(self.input))
-            print("Jumlah byte akhir:", len(self.output) - 1)
+            print("Jumlah byte akhir:", len(self.output.split(' ')) - 1)
         else:
             print("String tidak boleh kosong!")
 
     def decode(self):
         # self.input = input("Masukkan string yang ingin di-decode: ")
-        self.input = "ABABBABCAB"
+        self.input = "9 20 5 28 2 5 31".split(" ")
         print()
 
         if len(self.input) > 0:
-            try:
+            # try:
+            self.table.append(
+                ["PW string", "CW", "", "P", "C", "Output", "Add to dictionary"]
+            )
+            self.table.append(["", "Index", "String", "", "", "", "Index", "String"])
+            PWS = "NULL"
+            for i in range(len(self.input)):
+                CWI = int(self.input[i])
+                CWS = self.dict[CWI]
+
+                P = CWS
+                C = "" if i == 0 else PWS
+                O = CWS[0]
+                # P = "" if i == len(self.input) else CWS
+                # C = "" if i == 0 or i == len(self.input) else PWS
+                # O = "" if i == len(self.input) else CWS[0]
+
                 self.table.append(
-                    ["PW string", "CW", "", "P", "C", "Output", "Add to dictionary"]
+                    [
+                        PWS,
+                        CWI,
+                        CWS,
+                        "" if P else P,
+                        C,
+                        O,
+                        "" if P + C in self.dict else len(self.dict),
+                        "" if P + C in self.dict else P + C,
+                    ]
                 )
-                self.table.append(
-                    ["", "Index", "String", "", "", "", "Index", "String"]
-                )
-                tabulate(
-                    self.table,
-                    {(0, 1): 2, (0, 6): 2},
-                    {(0, 0): 2, (0, 3): 2, (0, 4): 2, (0, 5): 2},
-                )
-            except:
-                print("String tidak valid")
+                if P + C not in self.dict:  # and i != len(self.input)
+                    self.dict.append(P + C)
+                PWS = CWS
+            tabulate(
+                self.table,
+                {(0, 1): 2, (0, 6): 2},
+                {(0, 0): 2, (0, 3): 2, (0, 4): 2, (0, 5): 2},
+            )
+        # except:
+        #     print("String tidak valid")
         else:
             print("String tidak boleh kosong!")
 
@@ -103,7 +131,8 @@ class Huffman:
 if __name__ == "__main__":
     # try:
     huffman = Huffman()
-    option = int(input("1. Encode\n2. Decode\nApa yang ingin kamu lakukan? "))
+    option = 1
+    # option = int(input("1. Encode\n2. Decode\nApa yang ingin kamu lakukan? "))
     if option == 1:
         huffman.encode()
     elif option == 2:
