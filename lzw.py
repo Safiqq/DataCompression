@@ -2,7 +2,7 @@
 from tabulate_cell_merger.tabulate_cell_merger import tabulate
 
 
-class Huffman:
+class LZW:
     def __init__(self):
         self.input = ""
         # self.input = input("Masukkan string yang ingin di-encode: ")
@@ -130,13 +130,13 @@ class Huffman:
 
 if __name__ == "__main__":
     # try:
-    huffman = Huffman()
-    option = 1
+    lzw = LZW()
+    option = 2
     # option = int(input("1. Encode\n2. Decode\nApa yang ingin kamu lakukan? "))
     if option == 1:
-        huffman.encode()
+        lzw.encode()
     elif option == 2:
-        huffman.decode()
+        lzw.decode()
     else:
         print("!!!")
 # except:
