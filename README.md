@@ -15,7 +15,13 @@ This repository contains three data compression algorithms implemented in Python
 You can use these scripts to perform data compression and decompression:
 
 ```
-python {rle/huffman/lzw}.py
+python rle.py
+```
+```
+python huffman.py
+```
+```
+python lzw.py
 ```
 
 or you can run the main program instead by:
